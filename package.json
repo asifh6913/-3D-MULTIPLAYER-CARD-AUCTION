@@ -1,0 +1,23 @@
+{
+  "name": "card-auction",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Card Auction - 3D multiplayer card auction. Local Node server + Cloudflare Worker deployment.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "sync": "node scripts/sync-assets.js",
+    "cf:dev": "npm run sync && wrangler dev",
+    "cf:deploy": "npm run sync && wrangler deploy",
+    "cf:tail": "wrangler tail",
+    "cf:db:init": "wrangler d1 migrations apply cardauction --remote",
+    "cf:db:init:local": "wrangler d1 migrations apply cardauction --local",
+    "cf:logs:init": "wrangler d1 execute cardauction --remote --file=migrations/0001_init.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
